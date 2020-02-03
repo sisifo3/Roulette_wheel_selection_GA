@@ -1,0 +1,138 @@
+function [index] = my_own_RWS(x)
+% generamos la probabilidad de que sean seleccionados, esta aumenta 
+%dependiendo de su fitness
+%sum_of_fitness = 10
+%previous_probability = 0.0
+%disp(x)
+ce_num = x;
+%disp(ce_num)
+vec_prio = [];
+for le = 1:50
+    vec_prio = [vec_prio,ce_num{le,3}];
+end  
+
+
+
+%[1] = previous_probability + (fitness / sum_of_fitness) = 0.0 + (1 / 10) = 0.1
+%previous_probability = 0.1
+%disp(x)
+xb = flipud(vec_prio); %invertimos los valores 
+Xpro = [];
+Xpro = xb/sum(xb);   %Generamos todo la matriz con los resultados (fitness / sum_of_fitness)
+
+
+%Generamos la probabilidad de ser seleccionado la suma de pre_pro + (fit/sum)
+proba = [];
+prev_proba = 0;
+for km = 1:length(x)
+    proba(km) = prev_proba + Xpro(km);
+    prev_proba = proba(km);
+end
+%disp(proba)
+
+
+%*****************************************
+
+
+
+
+%Escogemos al asar el numero en index que necesitamos.
+num_rand = rand;
+%disp(i_rand)
+for kr = 1:length(proba)
+    if num_rand < proba(kr)
+       % index = kr;
+        %return
+    end
+end
+%disp('pop')
+
+%out = randsrc(M,N,[A,B,C,D,E,F;a,b,c,d,e,f]);
+%te da una ubicacion por indice de el numero seleccionado.
+%vamos a darle mas priridad, a los individuos más aptos.
+% va a regresar al individuo en aptitud, no en index
+
+num = zeros(14,1);
+Ce_numero = num2cell(num); %convertimos el array en celda.
+array_1 =[];
+array_2 = [];
+array_3 = [];
+array_4 = [];
+array_5 = [];
+array_6 = [];
+array_7 = [];
+array_8 = [];
+array_9 = [];
+array1 = [];
+%disp(ce_num)
+for kr1 = 1:length(ce_num)
+    %disp(ce_num{kr1,3})
+    if ce_num{kr1,3}<.1 && ce_num{kr1,3}> 0
+        array_1 = [array_1,ce_num{kr1,3}];
+    elseif ce_num{kr1,3}<.2 && ce_num{kr1,3}>=.1
+        array_2 = [array_2,ce_num{kr1,3}];
+    elseif ce_num{kr1,3}<.3 && ce_num{kr1,3}>=.2
+        array_3 = [array_3,ce_num{kr1,3}];
+    elseif ce_num{kr1,3}<.4 && ce_num{kr1,3}>=.3
+        array_4 = [array_4,ce_num{kr1,3}];
+    elseif ce_num{kr1,3}<.5 && ce_num{kr1,3}>=.4
+        array_5 = [array_5,ce_num{kr1,3}];
+    elseif ce_num{kr1,3}<.6 && ce_num{kr1,3}>=.5
+        array_6 = [array_6,ce_num{kr1,3}];
+    elseif ce_num{kr1,3}<.7 && ce_num{kr1,3}>=.6
+        array_7 = [array_7,ce_num{kr1,3}];
+    elseif ce_num{kr1,3}<.8 && ce_num{kr1,3}>=.7
+        array_8 = [array_8,ce_num{kr1,3}];
+    elseif ce_num{kr1,3}<.9 && ce_num{kr1,3}>=.8
+        array_9 = [array_9,ce_num{kr1,3}];
+    elseif ce_num{kr1,3}<=1 && ce_num{kr1,3}>=.9
+        array1 = [array1,ce_num{kr1,3}];
+    end
+end
+%disp(array1)
+Ce_numero{1} = array_1;
+Ce_numero{2} = array_2;
+Ce_numero{3} = array_3;
+Ce_numero{4} = array_4;
+Ce_numero{5} = array_5;    
+Ce_numero{6} = array_6;
+Ce_numero{7,1} = [Ce_numero{7,1},array_7];
+Ce_numero{8,1} = [Ce_numero{8,1},array_7];
+Ce_numero{9,1} = [Ce_numero{9,1},array_8];
+Ce_numero{10,1} = [Ce_numero{10,1},array_8];
+Ce_numero{11,1} = [Ce_numero{11,1},array_9];
+Ce_numero{12,1} = [Ce_numero{12,1},array_9];
+Ce_numero{13,1} = [Ce_numero{13,1},array1];
+Ce_numero{14,1} = [Ce_numero{14,1},array1];
+
+
+
+
+%disp(Ce_numero)
+%disp('done')
+%for prio = 1:4
+%index = Ce_numero;   
+
+ 
+num_random = randi(14);
+disp(num_random)
+elect = [];
+elect = Ce_numero{num_random,1};
+disp(elect)
+num_rand_int = randi(length(elect));
+disp(num_rand_int)
+index = elect(num_rand_int);
+disp(index)
+%for kcr = 1:length(elect)
+%    if num_random == 
+       % index = kr;
+        %return
+%    end
+%end
+ 
+ 
+ 
+ 
+ 
+ 
+end
